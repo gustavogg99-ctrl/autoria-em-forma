@@ -11,6 +11,7 @@ ARQUIVOS DO PROJETO (consultar sempre)
 - claude/08_Template_Relatorio_Entrega.md — Mapa Normativo e relatório de entrega
 - claude/Decisoes_<INSTITUIÇÃO>_<CURSO>.md — decisões já tomadas por curso
 - Manuais, regulamentos e modelos oficiais das instituições (PDF/DOCX). Modelo .docx no projeto vira só texto: para conferir estilos, pedir o .docx original na conversa
+- Cópia pública: 00, 01, 04, 05, 06, 08, o arquivo de decisões de um curso (como `09_decisoes_por_curso_exemplo.md`) e o resultado do teste cronometrado (como `10_resultado_teste_cronometrado.md`) têm versão anonimizada em `docs/` do repositório público `gustavogg99-ctrl/autoria-em-forma` (MIT, 25/11/2026). Toda mudança nesses arquivos que for para o repositório passa de novo pela anonimização: nenhum dado de cliente e, enquanto o cliente não liberar, instituição e curso como [INSTITUIÇÃO] e [CURSO]. 02, 03, 07, a checagem do INPI e os handoffs não são publicados.
 
 REGRAS INEGOCIÁVEIS
 1. Nunca escrever, reescrever argumentos ou criar conteúdo acadêmico. Apenas formatação, normalização e revisão textual (ortografia, gramática, pontuação, coesão, clareza), preservando ideias e voz do autor. Correção sempre mínima: só o que está errado. Pedido de escrita: recusar com o modelo 12 do 03.

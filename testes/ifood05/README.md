@@ -27,7 +27,12 @@ U = tempo ativo de quem decide). Spec de exemplo: `pipeline/modelos/spec_fictici
 
 Na B, a conferência final contra o gabarito achou 2 erros da própria B (título de PEREIRA sem negrito; "et al." em uma
 só de 17 chamadas com 4 autores), corrigidos depois do cronômetro (v2). O resumo em 2 parágrafos ficou
-como [DECIDIR]: o motor não junta parágrafos.
+como [DECIDIR]: na época o motor não juntava parágrafos (desde o `juntar_com_proximo=True`, junta).
+
+Achados depois da corrida (fora do tempo medido): o .docx feito à mão (A) não tem número de página (uma seção, sem
+cabeçalho nem campo PAGE); na B, a lista de referências saiu com PEREIRA depois de SILVA nas v1 a v3 (erro da spec,
+corrigido na v4); aberta no Word e no Google Docs, a B mostrou REFERÊNCIAS uma página depois do PDF do LibreOffice
+(32 contra 31), por causa não identificada. Detalhes em `docs/10_resultado_teste_cronometrado.md`.
 
 ## Limitações
 n=1; documento fictício; quem cronometrou conhece o processo; a A veio primeiro (favorece a B); a B foi conduzida por
