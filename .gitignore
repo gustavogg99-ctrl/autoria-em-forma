@@ -1,0 +1,19 @@
+# Trabalho de cliente nunca entra no repositório (06, seções 4 e 8)
+*.docx
+*.docm
+*.doc
+*.pdf
+*.odt
+entrada/
+saida/
+trabalhos/
+termos*.txt
+trechos*.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Cloudflare (estado local do wrangler dev: banco de teste)
+.wrangler/

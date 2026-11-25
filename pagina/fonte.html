@@ -1,0 +1,1052 @@
+<title>Formatação ABNT e revisão de TCC em Brasília | Autoria em Forma</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Formatação ABNT e revisão de TCC, monografia e artigo no padrão do seu curso, da sua faculdade e da ABNT, com cada correção marcada e explicada. Distrito Federal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* Direção "a página é o objeto": o site é uma pasta de TCC com abas. A capa é escura, as abas levam às seções
+   e a pasta da frente, aberta, guarda a folha A4 marcada. Estilo Editorial (Gelasio, tinta #111 sobre papel),
+   com um único acento: o vermelho da caneta de revisão, só na ação e nas marcas. Visual único (impresso), sem tema escuro. */
+:root {
+  --chao: #111111;        /* capa da pasta e campos escuros */
+  --papel: #f1f1f1;       /* folha da pasta / chão das seções claras */
+  --folha: #ffffff;       /* folha A4 e cartões */
+  --tinta: #111827;       /* texto */
+  --tinta-suave: #4b5260; /* notas secundárias (contraste 7,6:1 sobre papel) */
+  --caneta: #b42318;      /* acento: ação e marcas de revisão (6,4:1 sobre branco) */
+  --caneta-fundo: #fbe9e7;
+  --pasta-1: #2b2b2b; --pasta-2: #404040; --pasta-3: #575757; --pasta-4: #cfcfcf;
+
+  --f: "Gelasio", Georgia, "Times New Roman", serif;
+
+  --t-xl: clamp(56px, 10vw, 156px);
+  --t-l: clamp(40px, 5vw, 72px);
+  --t-m: clamp(26px, 2.4vw, 34px);
+  --t-s: 20px;
+  --t-body: 17px;
+  --t-mini: 14px;
+
+  --margem: max(16px, min(4vw, 48px));
+  --secao: clamp(96px, 12vw, 200px);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { background: var(--chao); }
+body {
+  margin: 0; background: var(--papel); color: var(--tinta);
+  font-family: var(--f); font-size: var(--t-body); line-height: 1.55;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+h1, h2, h3 { margin: 0; font-weight: 600; line-height: 1.02; letter-spacing: -0.025em; text-wrap: balance; }
+p { margin: 0; }
+a { color: inherit; }
+.faixa { padding-left: max(var(--margem), env(safe-area-inset-left, 0px)); padding-right: max(var(--margem), env(safe-area-inset-right, 0px)); }
+.miolo { max-width: 1344px; margin-inline: auto; }
+:focus-visible { outline: 3px solid var(--caneta); outline-offset: 3px; }
+.botao {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 56px; padding: 0 28px;
+  background: var(--caneta); color: #fff; font: 600 var(--t-body)/1 var(--f); text-decoration: none; border: 0; cursor: pointer;
+  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%, 0 10px);
+  transition: transform .18s ease, background-color .18s ease;
+}
+.botao:hover { background: #8f1c13; transform: translateY(-2px); }
+.botao:active { transform: translateY(0); }
+.botao svg { width: 20px; height: 20px; fill: currentColor; flex: none; }
+.arraste { display: none; font-size: var(--t-mini); margin-top: 10px; }
+.oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- capa ---------- */
+.capa { background: var(--chao); color: var(--papel); overflow: hidden; }
+.topo { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 72px; }
+.topo .marca { grid-column: 2; font-size: var(--t-s); font-weight: 600; text-decoration: none; letter-spacing: -0.01em; }
+.topo .link { justify-self: end; font-size: var(--t-mini); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.topo .link:hover { color: #fff; }
+.capa h1 { text-align: center; font-size: clamp(40px, 5.6vw, 88px); font-weight: 700; letter-spacing: -0.035em; line-height: 0.98; max-width: 18ch; margin: clamp(40px, 6vw, 72px) auto 0; }
+.capa .apoio { text-align: center; font-size: var(--t-s); line-height: 1.45; max-width: 46ch; margin: 28px auto 0; }
+.frente .acao { display: grid; gap: 12px; justify-items: start; }
+.frente .lado .metade { font-size: var(--t-body); }
+.frente .lado .metade b { color: var(--caneta); }
+.frente .lado .vagas { font-size: var(--t-mini); font-weight: 600; }
+/* Atendimento pausado (nov/2026). Para reabrir: remover .pausa e PAUSADO no script. */
+.capa .pausa { display: block; width: fit-content; max-width: 100%; box-sizing: border-box; margin: 0 auto 18px; padding: 10px 14px; border-left: 4px solid var(--caneta); background: var(--caneta-fundo); color: var(--tinta); font: 500 var(--t-mini)/1.5 var(--f); }
+.frente .lado .vagas a { color: var(--caneta); text-underline-offset: 3px; }
+
+.pastas { position: relative; width: 86%; margin: clamp(56px, 7vw, 96px) auto 0; }
+.pasta { position: relative; height: 64px; }
+.pasta:first-child { margin-top: 0; }
+.pasta .fundo { position: absolute; left: 0; right: 0; top: 40px; height: 120px; }
+.pasta .aba {
+  z-index: 1; position: absolute; top: 0; height: 41px; min-width: 200px; padding: 0 36px; display: flex; align-items: center;
+  font-size: var(--t-body); font-weight: 500; text-decoration: none; letter-spacing: -0.01em;
+  clip-path: polygon(16px 0, calc(100% - 16px) 0, 100% 100%, 0 100%);
+  transition: transform .2s ease;
+}
+.pasta .aba:hover { transform: translateY(-6px); }
+.p1 { z-index: 1; } .p2 { z-index: 2; } .p3 { z-index: 3; } .p4 { z-index: 4; } .pasta.frente { z-index: 5; }
+.p1 .fundo, .p1 .aba { background: var(--pasta-1); color: var(--papel); } .p1 .aba { left: 4%; }
+.p2 .fundo, .p2 .aba { background: var(--pasta-2); color: var(--papel); } .p2 .aba { left: 27%; }
+.p3 .fundo, .p3 .aba { background: var(--pasta-3); color: #fff; }     .p3 .aba { left: 50%; }
+.p4 .fundo, .p4 .aba { background: var(--pasta-4); color: var(--tinta); } .p4 .aba { left: 73%; }
+.pasta.frente { height: auto; color: var(--tinta); z-index: 5; padding-top: 40px; }
+.frente .aba { left: 0; width: 200px; background: var(--papel); }
+.frente .conteudo { background: var(--papel); padding: clamp(28px, 4vw, 56px); padding-bottom: 0;
+  display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.frente .lado { display: grid; gap: 22px; align-content: start; padding-top: 8px; min-width: 0; }
+.frente .lado h2 { font-size: var(--t-m); }
+.frente .lado p { max-width: 44ch; }
+.frente .lado .nota { font-size: var(--t-mini); color: var(--tinta-suave); }
+
+/* folha A4 marcada (fragmento real do produto: a página do Word) */
+.documento { min-width: 0; }
+.alternar { display: inline-flex; background: #e2e2e2; padding: 4px; gap: 4px; margin-bottom: 14px; }
+.alternar button { font: 500 var(--t-mini)/1 var(--f); border: 0; padding: 0 16px; min-height: 44px; background: transparent; color: var(--tinta); cursor: pointer; transition: background-color .15s ease; }
+.alternar button[aria-pressed="true"] { background: var(--folha); }
+.alternar button:hover { background: #ececec; }
+.a4 { position: relative; background: var(--folha); aspect-ratio: 210 / 250; max-width: 100%;
+  padding: 13% 9% 0 13%; font-size: clamp(12.5px, 1.15vw, 15px); line-height: 1.75; overflow: hidden; }
+.a4 .pag { position: absolute; top: 5.5%; right: 9%; font-size: 13px; }
+.a4 .titulo { font-weight: 700; font-size: .92em; margin-bottom: 1.2em; }
+.a4 p { text-indent: 1.25cm; text-align: justify; margin-bottom: .7em; }
+.a4 .longa { text-indent: 0; margin: 1em 0 1em 30%; font-size: .86em; line-height: 1.3; }
+.a4 .cota { position: absolute; font-size: 12px; color: #6b7280; }
+.a4 .cota.sup { top: 4%; left: 13%; } .a4 .cota.esq { top: 13%; left: 2.5%; writing-mode: vertical-rl; transform: rotate(180deg); }
+.ins { color: var(--caneta); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 2px; }
+.del { color: var(--caneta); text-decoration: line-through; }
+.a4 .balao { position: absolute; right: 3%; bottom: 7%; width: min(56%, 260px); background: var(--caneta-fundo); border-left: 3px solid var(--caneta);
+  padding: 10px 12px; font-size: 13px; line-height: 1.45; text-indent: 0; text-align: left; transition: opacity .2s ease, transform .2s ease; }
+.a4 .balao b { color: var(--caneta); }
+.a4[data-versao="final"] .del, .a4[data-versao="final"] .balao { display: none; }
+.a4[data-versao="final"] .ins { color: inherit; text-decoration: none; }
+
+/* ---------- problema: três perguntas ---------- */
+.dores { padding-block: clamp(80px, 9vw, 140px) 0; }
+.perguntas-dor { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.perguntas-dor li { font-size: var(--t-m); line-height: 1.2; letter-spacing: -0.015em; border-top: 2px solid var(--tinta); padding-top: 18px; }
+.dores .fecho { margin-top: clamp(32px, 4vw, 56px); font-size: var(--t-m); font-weight: 700; color: var(--caneta); letter-spacing: -0.015em; }
+
+/* ---------- quem faz ---------- */
+.quem { background: var(--folha); padding-block: clamp(72px, 8vw, 120px); }
+.quem .miolo { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: start; }
+.quem h2 { grid-column: 1 / 4; font-size: var(--t-m); }
+.quem .miolo > div { grid-column: 5 / 13; display: grid; gap: 16px; }
+.quem .frase { font-size: var(--t-m); line-height: 1.25; letter-spacing: -0.015em; max-width: 30ch; }
+.quem .assinatura { font-size: var(--t-body); color: var(--tinta-suave); }
+
+/* ---------- regras (título, nota, fatos) ---------- */
+.regras { padding-block: var(--secao) clamp(80px, 9vw, 120px); }
+.regras .linha1 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: end; }
+.regras h2 { grid-column: 1 / 8; font-size: var(--t-l); font-weight: 400; }
+.regras .nota { grid-column: 9 / 13; max-width: 34ch; }
+.fatos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: clamp(64px, 8vw, 120px); }
+.fato strong { display: block; font-size: var(--t-m); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; }
+.fato span { display: block; margin-top: 10px; font-size: var(--t-mini); color: var(--tinta-suave); max-width: 30ch; }
+.divergencia { margin-top: clamp(56px, 7vw, 96px); display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; align-items: center; }
+.divergencia .texto { grid-column: 1 / 6; display: grid; gap: 14px; }
+.divergencia .texto h3 { font-size: var(--t-s); }
+.divergencia .texto p { color: var(--tinta); max-width: 44ch; }
+.quadro { grid-column: 7 / 13; background: var(--folha); padding: 28px; display: grid; gap: 16px; font-size: 15px; line-height: 1.5; }
+.quadro .cab { font-weight: 700; color: var(--caneta); }
+.quadro .dois { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.quadro .dois div { background: var(--papel); padding: 14px; }
+.quadro .dois b { display: block; font-size: 13px; margin-bottom: 6px; }
+.quadro .decisao { background: var(--papel); padding: 12px 14px; }
+
+/* ---------- saída: tiras de comentário ---------- */
+.saida { background: var(--chao); color: var(--papel); position: relative; overflow: hidden; min-height: 96svh; padding-top: var(--secao); display: flex; flex-direction: column; }
+.saida .texto { width: min(100%, 860px); margin-left: 18%; display: grid; gap: 20px; }
+.saida .texto p, .saida .texto .par { font-size: var(--t-m); line-height: 1.35; letter-spacing: -0.01em; }
+.saida .texto h2 { font-size: inherit; display: inline; font-weight: 700; letter-spacing: -0.01em; }
+.saida .texto .legenda-prefixos { font-size: var(--t-mini); line-height: 1.7; color: #c9c9c9; max-width: 72ch; }
+.saida .texto .legenda-prefixos b { color: #fff; font-weight: 600; }
+.tiras { margin-top: auto; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; align-items: end; padding-top: 72px; }
+.tira { background: var(--folha); color: var(--tinta); padding: 18px 18px 0; font-size: var(--t-mini); line-height: 1.5; overflow: hidden; transition: transform .25s ease; }
+.tira:hover { transform: translateY(-10px) rotate(0deg) !important; }
+.tira b { display: block; color: var(--caneta); }
+.tira .corte { display: block; color: var(--tinta-suave); letter-spacing: .1em; margin: 6px 0; }
+.tira.h1 { height: 34svh; } .tira.h2 { height: 42svh; transform: rotate(-1.5deg); } .tira.h3 { height: 30svh; }
+.tira.h4 { height: 44svh; transform: rotate(1deg); } .tira.h5 { height: 27svh; } .tira.h6 { height: 38svh; transform: rotate(-1deg); }
+
+/* ---------- entrega: palavra gigante + barras ---------- */
+.entrega { padding-block: var(--secao) 120px; }
+.entrega .miolo { display: grid; grid-template-columns: minmax(0, 600px) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: start; }
+.coluna { container-type: inline-size; min-width: 0; }
+.palavra { font-size: 23cqw; font-weight: 700; line-height: .8; letter-spacing: -0.05em; margin-bottom: 24px; }
+.barras { display: grid; gap: 6px; }
+.barras details { background: #e3e3e3; }
+.barras summary { list-style: none; cursor: pointer; min-height: 56px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-weight: 500; transition: background-color .15s ease; }
+.barras summary:hover { background: #d8d8d8; }
+.barras summary::-webkit-details-marker { display: none; }
+.barras summary::after { content: "+"; font-size: 22px; line-height: 1; transition: transform .2s ease; }
+.barras details[open] summary::after { transform: rotate(45deg); }
+.barras .painel { padding: 4px 18px 20px; display: grid; gap: 14px; }
+.barras .painel .item { display: flex; justify-content: space-between; gap: 16px; }
+.barras .painel .item span:last-child { color: var(--tinta-suave); white-space: nowrap; }
+.previa { position: sticky; top: 96px; min-width: 0; }
+.previa .moldura { position: relative; aspect-ratio: 4 / 3.4; background: var(--folha); overflow: hidden; }
+.previa .quadro-previa { position: absolute; inset: 0; padding: 9% 10%; opacity: 0; visibility: hidden; transition: opacity .24s ease; font-size: var(--t-mini); line-height: 1.6; display: grid; align-content: start; gap: 10px; }
+.previa .quadro-previa.ativo { opacity: 1; visibility: visible; }
+.previa .legenda { margin-top: 12px; font-size: var(--t-mini); color: var(--tinta-suave); }
+.qp-titulo { font-weight: 700; }
+.qp-linha { height: .62em; background: #e5e7eb; }
+.qp-linha.c { width: 72%; } .qp-linha.m { width: 88%; }
+.qp-marca { position: absolute; inset: 0; display: grid; place-items: center; font-size: 64px; font-weight: 700; color: rgba(17,24,39,.08); transform: rotate(-24deg); pointer-events: none; }
+.qp-tabela { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; font-size: 14px; }
+.qp-tabela span:nth-child(even) { font-weight: 600; }
+
+/* ---------- processo: linha arrastável ---------- */
+.processo { padding-block: 96px 0; background: var(--folha); }
+.processo .cab { display: flex; justify-content: space-between; align-items: end; gap: 16px; }
+.processo h2 { font-size: var(--t-m); }
+.setas { display: flex; gap: 8px; }
+.setas button { width: 48px; height: 48px; border: 0; background: var(--tinta); color: var(--papel); font: 600 20px/1 var(--f); cursor: pointer; transition: background-color .15s ease; }
+.setas button:hover { background: var(--caneta); }
+.progresso { height: 6px; background: #e5e7eb; margin-top: 20px; position: relative; }
+.progresso span { position: absolute; left: 0; top: 0; bottom: 0; width: 20%; background: var(--tinta); transition: width .15s linear; }
+.trilho { display: flex; gap: 32px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 40px 0 96px; scrollbar-width: none; }
+.trilho::-webkit-scrollbar { display: none; }
+.processo .trilho { margin-inline: calc(-1 * max(var(--margem), env(safe-area-inset-left, 0px))); padding-inline: max(var(--margem), env(safe-area-inset-left, 0px)); scroll-padding-inline: max(var(--margem), env(safe-area-inset-left, 0px)); }
+.trilho ol { display: contents; }
+.momento { flex: 0 0 280px; scroll-snap-align: start; display: flex; flex-direction: column; }
+.momento:last-child { margin-right: max(var(--margem), env(safe-area-inset-right, 0px)); }
+.momento h3 { font-size: var(--t-s); }
+.momento p { margin-top: 10px; font-size: var(--t-mini); color: var(--tinta-suave); }
+.momento .espaco { flex: none; }
+.momento .peca { margin-top: auto; aspect-ratio: 1 / 1; background: var(--papel); padding: 20px; display: grid; align-content: center; gap: 8px; font-size: var(--t-mini); line-height: 1.45; }
+.momento .peca big { font-size: var(--t-m); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+.e1 { height: 96px; } .e2 { height: 140px; } .e3 { height: 80px; } .e4 { height: 128px; } .e5 { height: 104px; } .e6 { height: 136px; }
+
+/* ---------- preços em tabela ---------- */
+.precos { padding-block: 120px var(--secao); }
+.precos .miolo { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
+.precos .esq { grid-column: 1 / 4; display: grid; gap: 18px; align-content: start; align-self: start; position: sticky; top: 104px; }
+.precos h2 { font-size: var(--t-m); }
+.precos .esq p { font-size: var(--t-body); color: var(--tinta-suave); }
+.tabelas { grid-column: 5 / 13; display: grid; gap: 40px; min-width: 0; }
+.bloco-preco { display: grid; gap: 14px; min-width: 0; }
+.bloco-preco h3 { font-size: var(--t-s); font-weight: 600; }
+.bloco-preco .rodape-tab { font-size: var(--t-mini); color: var(--tinta-suave); max-width: 70ch; }
+.tabela { width: 100%; border-collapse: collapse; background: var(--folha); font-size: 16px; line-height: 1.4; font-variant-numeric: tabular-nums lining-nums; }
+.tabela th, .tabela td { text-align: left; vertical-align: top; padding: 16px 18px; border-bottom: 1px solid #e4e4e4; }
+.tabela thead th { background: var(--tinta); color: #fff; font-size: var(--t-mini); font-weight: 600; vertical-align: bottom; border-bottom: 0; }
+.tabela thead th small { display: block; font-weight: 400; color: #c9c9c9; margin-top: 2px; }
+.tabela tbody th { font-weight: 600; }
+.tabela tbody tr:last-child th, .tabela tbody tr:last-child td { border-bottom: 0; }
+.tabela tbody tr:nth-child(even) { background: #fafafa; }
+.tabela .valor { display: block; font-size: var(--t-s); font-weight: 700; letter-spacing: -0.01em; }
+.tabela .prazo { display: block; font-size: var(--t-mini); color: var(--tinta-suave); margin-top: 2px; }
+.tabela .num { white-space: nowrap; font-weight: 700; }
+.tabela .det { color: var(--tinta-suave); font-size: 15px; }
+.lancamento { grid-column: 5 / 13; background: var(--folha); padding: 22px 24px; display: grid; gap: 6px; border-left: 3px solid var(--caneta); }
+.lancamento b { color: var(--caneta); }
+
+/* ---------- prova: lista impressa ---------- */
+.prova { background: var(--chao); overflow: hidden; padding-top: 72px; }
+.cartao { width: min(56vw, 760px); margin: 0 auto -48px; background: var(--papel); transform: rotate(-1.5deg); padding: 56px 56px 112px; text-align: center; }
+.cartao h2 { font-size: var(--t-m); }
+.cartao .nomes { margin-top: 28px; font-size: var(--t-s); line-height: 1.7; }
+.cartao .normas { margin-top: 36px; font-size: var(--t-mini); line-height: 1.8; color: var(--tinta-suave); }
+.cartao .normas summary { cursor: pointer; min-height: 44px; display: inline-flex; align-items: center; text-decoration: underline; text-underline-offset: 4px; }
+.cartao .normas summary:hover { color: var(--tinta); }
+.cartao .normas p { margin-top: 8px; }
+.cartao .pedido { margin-top: 28px; font-size: var(--t-mini); color: var(--tinta-suave); }
+
+/* ---------- perguntas em sanfona, por tema ---------- */
+.perguntas { padding-block: var(--secao) 120px; }
+.perguntas .miolo { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
+.perguntas .cab-faq { grid-column: 1 / 4; display: grid; gap: 16px; align-content: start; align-self: start; position: sticky; top: 104px; }
+.perguntas h2 { font-size: var(--t-m); }
+.perguntas .cab-faq p { font-size: var(--t-body); color: var(--tinta-suave); }
+.perguntas .cab-faq a { color: var(--caneta); font-weight: 600; text-underline-offset: 4px; }
+.faq { grid-column: 5 / 13; display: grid; gap: 36px; min-width: 0; }
+.faq-grupo { display: grid; gap: 10px; }
+.faq-grupo h3 { font-size: var(--t-mini); font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--tinta-suave); }
+.faq-lista { display: grid; gap: 6px; }
+.faq details { background: var(--folha); border-left: 3px solid transparent; transition: border-color .15s ease; }
+.faq details[open] { border-left-color: var(--caneta); }
+.faq summary { list-style: none; cursor: pointer; min-height: 60px; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-weight: 600; line-height: 1.35; transition: background-color .15s ease; }
+.faq summary:hover { background: #f7f7f7; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; flex: none; width: 28px; height: 28px; display: grid; place-items: center; font-size: 22px; font-weight: 400; line-height: 1; background: var(--papel); transition: background-color .2s ease, color .2s ease; }
+.faq details[open] summary::after { content: "\2212"; background: var(--caneta); color: #fff; }
+.faq details p { padding: 0 20px 20px; max-width: 68ch; color: var(--tinta); }
+
+/* ---------- orçamento: o cartão de resposta vira a calculadora ---------- */
+.convite { background: var(--caneta); color: #fff; overflow: hidden; display: grid; }
+.convite .miolo { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; width: 100%; align-items: start; padding-block: 112px 120px; }
+.convite .chamado { grid-column: 1 / 5; display: grid; gap: 20px; align-content: start; position: sticky; top: 104px; }
+.convite .chamado h2 { font-size: var(--t-l); color: #fff; }
+.convite .chamado p { font-size: var(--t-s); line-height: 1.4; }
+.convite .chamado .contato { font-size: var(--t-body); display: grid; gap: 10px; justify-items: start; }
+.convite .chamado .numero { font-weight: 600; font-variant-numeric: tabular-nums; user-select: all; }
+.copiar { font: 500 var(--t-mini)/1 var(--f); background: #fff; color: var(--tinta); border: 0; min-height: 44px; padding: 0 16px; cursor: pointer; }
+.copiar:hover { background: var(--papel); }
+.cartao-resposta { grid-column: 6 / 13; background: var(--folha); color: var(--tinta); padding: clamp(24px, 3.5vw, 48px); display: grid; gap: 24px; }
+.cartao-resposta h3 { font-size: var(--t-m); }
+.campos { display: grid; grid-template-columns: 1fr 1fr; gap: 18px 20px; }
+.campo { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.campo.largo { grid-column: 1 / -1; }
+.campo label, .campo legend { font-size: var(--t-mini); font-weight: 600; padding: 0; }
+.campo .dica { font-size: var(--t-mini); color: var(--tinta-suave); }
+.campo input, .campo select { font: 400 var(--t-body)/1.2 var(--f); color: var(--tinta); background: var(--papel); border: 0; border-bottom: 2px solid #c9c9c9; min-height: 48px; padding: 10px 12px; width: 100%; border-radius: 0; appearance: none; }
+.campo select { background-image: none; padding-right: 32px; }
+.campo .seta { position: relative; }
+.campo .seta::after { content: "▾"; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.campo input:focus, .campo select:focus { outline: none; border-bottom-color: var(--caneta); background: #fff; }
+fieldset.campo { border: 0; margin: 0; padding: 0; min-width: 0; }
+.opcoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.opcoes label { position: relative; font-weight: 500; font-size: var(--t-mini); }
+.opcoes input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.opcoes span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; background: var(--papel); cursor: pointer; transition: background-color .15s ease, color .15s ease; }
+.opcoes span:hover { background: #e2e2e2; }
+.opcoes input:checked + span { background: var(--tinta); color: #fff; }
+.opcoes input:focus-visible + span { outline: 3px solid var(--caneta); outline-offset: 2px; }
+.opcoes input:disabled + span { opacity: .4; cursor: not-allowed; }
+.resultado { background: var(--papel); padding: 22px; display: grid; gap: 14px; }
+.resultado .valor { font-size: var(--t-l); font-weight: 700; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums lining-nums; }
+.resultado .linhas { display: grid; gap: 6px; font-size: var(--t-mini); }
+.resultado .linhas div { display: flex; justify-content: space-between; gap: 16px; }
+.resultado .linhas span:last-child { font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+.resultado .aviso { font-size: var(--t-mini); color: var(--caneta); font-weight: 600; }
+.resultado .aviso:empty { display: none; }
+.resultado .nota { font-size: var(--t-mini); color: var(--tinta-suave); max-width: 62ch; }
+.cartao-resposta .botao { width: 100%; clip-path: none; background: var(--tinta); }
+.cartao-resposta .botao:hover { background: #000; }
+.cartao-resposta .botao[aria-disabled="true"] { opacity: .45; pointer-events: none; }
+
+/* ---------- rodapé: o verso ---------- */
+.verso { background: var(--chao); padding-top: 120px; padding-bottom: 48px; }
+.verso .papel { position: relative; width: min(100%, 1120px); margin: 0 auto; background: var(--papel); padding: 72px 56px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.verso .recorte { position: absolute; left: 0; top: -24px; width: 100%; height: 25px; display: block; }
+.verso h2 { font-size: var(--t-m); }
+.verso .msg p { margin-top: 14px; max-width: 40ch; }
+.verso .enderecos { display: grid; gap: 12px; align-content: start; font-size: var(--t-body); }
+.verso .enderecos a { text-underline-offset: 4px; }
+.verso .imprenta { grid-column: 1 / -1; text-align: center; font-size: var(--t-mini); color: var(--tinta-suave); margin-top: 24px; }
+
+/* ---------- navegação flutuante: as abas da pasta viram uma barra fixa ao rolar ---------- */
+html { scroll-padding-top: 88px; scroll-behavior: smooth; }
+.navfixa { position: fixed; z-index: 50; top: max(12px, env(safe-area-inset-top, 0px)); left: 50%; display: flex; align-items: center; gap: 2px; padding: 5px;
+  max-width: calc(100vw - 24px); background: rgba(17, 17, 17, .94); color: var(--papel); box-shadow: 0 10px 30px rgba(0, 0, 0, .28);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  transform: translate(-50%, calc(-100% - 24px)); visibility: hidden; transition: transform .28s ease, visibility 0s linear .28s; }
+.navfixa.visivel, .navfixa:focus-within { transform: translate(-50%, 0); visibility: visible; transition: transform .28s ease, visibility 0s; }
+.navfixa a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; font: 500 var(--t-mini)/1 var(--f); text-decoration: none; white-space: nowrap; color: #cfcfcf; transition: background-color .15s ease, color .15s ease; }
+.navfixa a:hover { color: #fff; background: rgba(255, 255, 255, .1); }
+.navfixa a[aria-current="true"] { color: var(--tinta); background: var(--papel); }
+.navfixa .marca-mini { color: #fff; font-weight: 600; padding-right: 18px; margin-right: 4px; border-right: 1px solid rgba(255, 255, 255, .16); }
+.navfixa .cta { margin-left: 6px; background: var(--caneta); color: #fff; font-weight: 600; }
+.navfixa .cta:hover { background: #8f1c13; }
+.navfixa .cta[aria-current="true"] { background: #fff; color: var(--caneta); }
+.navfixa .curto { display: none; }
+
+/* ---------- movimento ---------- */
+.sobe { transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.sobe.espera { transform: translateY(28px); }
+@media (prefers-reduced-motion: reduce) {
+  *, .sobe, .sobe.espera { transition: none !important; transform: none !important; scroll-behavior: auto !important; }
+  html { scroll-behavior: auto; }
+  .navfixa, .navfixa.visivel { transform: translate(-50%, 0) !important; }
+  .navfixa:not(.visivel):not(:focus-within) { visibility: hidden; }
+  .tira.h2, .tira.h4, .tira.h6, .cartao { transform: none !important; }
+}
+
+/* ---------- telefone ---------- */
+@media (max-width: 860px) {
+  .topo { grid-template-columns: 1fr auto; }
+  .topo .marca { grid-column: 1; }
+  .capa h1 { font-size: clamp(32px, 9.4vw, 56px); margin-top: 56px; }
+  .capa .apoio { font-size: var(--t-body); }
+  .pastas { width: 100%; margin-top: 48px; }
+  .pasta { height: 52px; }
+  .pasta .fundo { inset: 32px 0 0; }
+  .pasta .aba { height: 33px; min-width: 0; padding: 0 22px; font-size: var(--t-mini); }
+  .p1 .aba { left: 0; } .p2 .aba { left: auto; right: 0; } .p3 .aba { left: 0; } .p4 .aba { left: auto; right: 0; }
+  .pasta.frente { padding-top: 32px; }
+  .frente .aba { width: 140px; }
+  .frente .conteudo { grid-template-columns: minmax(0, 1fr); padding: 24px 16px 0; }
+  .frente .botao { width: 100%; }
+  .frente .acao { justify-items: stretch; }
+  .a4 { aspect-ratio: auto; padding-bottom: 20px; }
+  .a4 .balao { position: static; width: auto; margin-top: 12px; }
+  .perguntas-dor { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .perguntas-dor li, .dores .fecho, .quem .frase { font-size: var(--t-s); }
+  .quem h2, .quem .miolo > div { grid-column: 1 / -1; }
+  .regras .linha1, .divergencia { grid-template-columns: minmax(0, 1fr); }
+  .regras h2, .regras .nota, .divergencia .texto, .quadro { grid-column: 1; }
+  .regras h2 { font-size: 11vw; }
+  .fatos { grid-template-columns: minmax(0, 1fr); row-gap: 28px; }
+  .quadro .dois { grid-template-columns: minmax(0, 1fr); }
+  .saida .texto { margin-left: 0; }
+  .saida .texto p, .saida .texto .par { font-size: var(--t-s); }
+  .tiras { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 46vw; overflow-x: auto; scrollbar-width: none; }
+  .tiras::-webkit-scrollbar { display: none; }
+  .tira { padding: 14px 12px 0; }
+  .entrega .miolo { grid-template-columns: minmax(0, 1fr); }
+  .previa { position: static; }
+  .momento { flex-basis: 84vw; }
+  .momento .peca { aspect-ratio: auto; min-height: 220px; }
+  .processo .trilho { margin-inline: 0; padding-inline: 0; scroll-padding-inline: 0; }
+  .momento:last-child { margin-right: 0; }
+  .setas { display: none; }
+  .arraste { display: block; }
+  .e1 { height: 40px; } .e2 { height: 64px; } .e3 { height: 32px; } .e4 { height: 56px; } .e5 { height: 44px; } .e6 { height: 60px; }
+  .precos .esq, .tabelas, .lancamento { grid-column: 1 / -1; }
+  .precos .esq, .perguntas .cab-faq { position: static; }
+  .tabela { font-size: 15px; }
+  .tabela th, .tabela td { padding: 12px 10px; }
+  .tabela .valor { font-size: 18px; }
+  .tabela.lista thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .tabela.lista, .tabela.lista tbody { display: block; }
+  .tabela.lista tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; padding: 14px 14px; border-bottom: 1px solid #e4e4e4; }
+  .tabela.lista tbody tr:last-child { border-bottom: 0; }
+  .tabela.lista th, .tabela.lista td { display: block; padding: 0; border: 0; }
+  .tabela.lista .det { grid-column: 1 / -1; margin-top: 4px; }
+  .cartao { width: 92%; padding: 28px 28px 160px; transform: rotate(-1deg); }
+  .cartao .nomes { font-size: var(--t-body); }
+  .perguntas .cab-faq, .faq { grid-column: 1 / -1; }
+  .faq summary { padding: 14px 16px; }
+  .faq details p { padding: 0 16px 18px; }
+  html { scroll-padding-top: 72px; }
+  .navfixa { top: 0; left: 0; right: 0; max-width: none; padding: 6px max(8px, env(safe-area-inset-left, 0px)); padding-top: max(6px, env(safe-area-inset-top, 0px));
+    transform: translateY(-100%); overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
+  .navfixa::-webkit-scrollbar { display: none; }
+  .navfixa.visivel, .navfixa:focus-within { transform: translateY(0); }
+  .navfixa { gap: 0; }
+  .navfixa a { padding: 0 9px; flex: none; font-size: 13px; }
+  .navfixa .marca-mini { display: none; }
+  .navfixa .longo { display: none; } .navfixa .curto { display: inline; }
+  .navfixa .cta { margin-left: 4px; }
+  .convite .miolo { grid-template-columns: minmax(0, 1fr); padding-block: 80px; }
+  .convite .chamado, .cartao-resposta { grid-column: 1; }
+  .convite .chamado { position: static; }
+  .convite .chamado h2 { font-size: 11vw; }
+  .campos { grid-template-columns: minmax(0, 1fr); }
+  .verso .papel { grid-template-columns: minmax(0, 1fr); padding: 56px 24px 24px; gap: 28px; }
+}
+</style>
+
+<nav class="navfixa" id="navfixa" aria-label="Seções da página">
+  <a class="marca-mini" href="#inicio">Autoria em Forma</a>
+  <a href="#entrega" data-alvo="entrega"><span class="longo">O que você recebe</span><span class="curto">Entrega</span></a>
+  <a href="#processo" data-alvo="processo"><span class="longo">Como funciona</span><span class="curto">Etapas</span></a>
+  <a href="#precos" data-alvo="precos">Preços</a>
+  <a href="#perguntas" data-alvo="perguntas">Perguntas</a>
+  <a class="cta" href="#orcamento" data-alvo="orcamento"><span class="longo">Calcular orçamento</span><span class="curto">Orçamento</span></a>
+</nav>
+
+<header class="capa faixa">
+  <div class="miolo">
+    <div class="topo">
+      <a class="marca" href="#inicio">Autoria em Forma</a>
+      <a class="link" href="#orcamento">Calcular orçamento</a>
+    </div>
+    <p class="pausa" role="note"><b>Atendimento pausado.</b> Não estou aceitando trabalhos no momento. A página segue publicada como portfólio do projeto.</p>
+    <h1 id="inicio" class="sobe">Formatação ABNT e revisão de TCC para alunos do DF, no padrão do seu curso.</h1>
+    <p class="apoio sobe">Cada correção marcada e explicada. Você vê a prévia antes de pagar o restante.</p>
+
+    <div class="pastas">
+      <div class="pasta p1"><a class="aba" href="#entrega">O que você recebe</a><div class="fundo"></div></div>
+      <div class="pasta p2"><a class="aba" href="#processo">Como funciona</a><div class="fundo"></div></div>
+      <div class="pasta p3"><a class="aba" href="#precos">Preços</a><div class="fundo"></div></div>
+      <div class="pasta p4"><a class="aba" href="#perguntas">Perguntas</a><div class="fundo"></div></div>
+      <div class="pasta frente">
+        <span class="aba" aria-hidden="true"></span>
+        <div class="conteudo">
+          <div class="lado sobe">
+            <h2>Você vê o que mudou e por quê.</h2>
+            <p>Seu trabalho volta no padrão da sua faculdade (e com o texto revisado, se você contratar a revisão). Junto vem uma versão marcada: o que mudou aparece riscado e destacado, com a regra ao lado. Nada é reescrito e nenhuma referência é inventada.</p>
+            <div class="acao">
+              <a class="botao" href="#orcamento">Ver a calculadora de orçamento</a>
+              <p class="metade"><b>Metade para começar.</b> A outra metade só depois de você ver a prévia.</p>
+            </div>
+            <p class="vagas">Atendimento pausado: sem vagas abertas no momento.</p>
+            <p class="nota">Para alunos de faculdades do Distrito Federal. A página de exemplo usa texto fictício.</p>
+          </div>
+          <div class="documento sobe">
+            <div class="alternar" role="group" aria-label="Ver a página">
+              <button type="button" id="ver-marcada" aria-pressed="true">Versão marcada</button>
+              <button type="button" id="ver-final" aria-pressed="false">Versão final</button>
+            </div>
+            <div class="a4" id="a4" data-ui data-versao="marcada" aria-label="Página de exemplo formatada na ABNT">
+              <span class="cota sup">3 cm</span><span class="cota esq">3 cm</span>
+              <span class="pag">12</span>
+              <div class="titulo">2 A IMPRENSA NAS PROVÍNCIAS</div>
+              <p>Os jornais de província <span class="del">tinha</span><span class="ins">tinham</span> circulação restrita e dependiam do correio imperial para chegar <span class="del">à</span><span class="ins">a</span> cidades do interior (SILVA, 2020).</p>
+              <p class="longa">A imprensa brasileira nasceu sob a tutela da Coroa e só ganhou autonomia depois da Independência, quando os periódicos passaram a disputar a opinião pública. (BARBOSA, 2010, p. 45).</p>
+              <p>Para Souza (2019), essa disputa definiu o tom dos jornais locais.</p>
+              <div class="balao"><b>[REGRA]</b> Concordância: “jornais” pede o verbo no plural. Antes de “cidades”, sem crase. A citação longa não muda, só a forma: recuo de 4 cm e espaço simples.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="dores faixa" id="problema" aria-label="O problema">
+    <div class="miolo">
+      <ul class="perguntas-dor">
+        <li class="sobe">O orientador devolveu por formatação?</li>
+        <li class="sobe">O manual do curso diz uma coisa e o da biblioteca diz outra?</li>
+        <li class="sobe">Sumário e número de página quebram toda vez que você mexe no texto?</li>
+      </ul>
+      <p class="fecho sobe">É disso que eu cuido.</p>
+    </div>
+  </section>
+
+  <section class="regras faixa" id="regras">
+    <div class="miolo">
+      <div class="linha1 sobe">
+        <h2>Três camadas de regra</h2>
+        <p class="nota">Manual da faculdade, regras do curso e ABNT muitas vezes não concordam. Eu leio as três e aplico a que vale para o seu caso, nesta ordem.</p>
+      </div>
+      <div class="fatos">
+        <div class="fato sobe"><strong>Seu curso</strong><span>Modelo da turma, orientação da coordenação e o que os TCCs aprovados fazem.</span></div>
+        <div class="fato sobe"><strong>Sua faculdade</strong><span>Manual da biblioteca, modelo oficial, capa e folha de aprovação.</span></div>
+        <div class="fato sobe"><strong>ABNT vigente</strong><span>No que o curso e a faculdade não definem, na edição certa e sem misturar edições.</span></div>
+      </div>
+      <div class="divergencia">
+        <div class="texto sobe">
+          <h3>Quando os manuais discordam, você vê os dois.</h3>
+          <p>O comentário mostra o trecho de cada manual, qual prevaleceu e por quê. Na dúvida, a recomendação é confirmar com o orientador antes da banca.</p>
+        </div>
+        <div class="quadro sobe" data-ui aria-label="Exemplo de comentário de divergência">
+          <span class="cab">[DIVERGÊNCIA] Chamada da citação entre parênteses</span>
+          <div class="dois">
+            <div><b>Manual do curso</b>Segue a NBR 10520:2002: autor em MAIÚSCULAS. (SILVA, 2020)</div>
+            <div><b>Manual da biblioteca</b>Segue a NBR 10520:2023: só a inicial maiúscula. (Silva, 2020)</div>
+          </div>
+          <span class="decisao">Prevaleceu o manual do curso. Pontuação também de 2002, para não misturar edições.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="saida faixa" id="comentarios">
+    <div class="texto sobe">
+      <div class="par"><h2>Cada correção vem com o porquê.</h2> <span>Na versão marcada, toda alteração fica no controle de alterações do Word, com um comentário dizendo a regra, o item e a edição da norma.</span></div>
+      <p>O que depende de você vira pendência. Nenhum dado é inventado.</p>
+      <p class="legenda-prefixos"><b>REGRA</b> = corrigi e mostro a regra · <b>PENDENTE</b> = preciso de um dado seu · <b>DECIDIR</b> = você escolhe · <b>DIVERGÊNCIA</b> = os manuais discordam e mostro qual vale · <b>FATO</b> = informação desatualizada, com a fonte</p>
+    </div>
+    <p class="arraste" aria-hidden="true">Arraste para o lado para ver mais exemplos →</p>
+    <div class="tiras" data-ui aria-label="Exemplos de comentários da versão marcada">
+      <div class="tira h1"><b>[REGRA]</b><span class="corte">- - - - - - - -</span>Os títulos numerados ficam no padrão: “1.1 Título”, sem ponto depois do número. NBR 6024:2012.</div>
+      <div class="tira h2"><b>[PENDENTE]</b><span class="corte">- - - - - - - -</span>Falta a editora de SOUZA (2019). Eu não completo de memória: você confirma na ficha catalográfica do livro?</div>
+      <div class="tira h3"><b>[DECIDIR]</b><span class="corte">- - - - - - - -</span>Você escreveu “e-mail” e “email” ao longo do texto. As duas formas existem. Qual delas fica em todo o trabalho?</div>
+      <div class="tira h4"><b>[FATO]</b><span class="corte">- - - - - - - -</span>Fora de citação, o texto chama a ferramenta de NotebookLM, mas ela foi renomeada para Gemini Notebook em julho de 2026. Ajuste mínimo, com a fonte e a data.</div>
+      <div class="tira h5"><b>[REGRA]</b><span class="corte">- - - - - - - -</span>Mesmo autor e mesmo ano: 2024a e 2024b, na chamada e na referência. NBR 10520:2023.</div>
+      <div class="tira h6"><b>[REGRA]</b><span class="corte">- - - - - - - -</span>Citação direta: o texto citado não muda, nem para corrigir data. Erro de grafia leva [sic]; o resto vira comentário para você.</div>
+    </div>
+  </section>
+
+  <section class="entrega faixa" id="entrega">
+    <div class="miolo">
+      <div class="coluna">
+        <h2 class="palavra sobe">Entrega</h2>
+        <div class="barras">
+          <details open data-previa="final"><summary>Versão final em Word</summary><div class="painel"><div class="item"><span>Pronta para entregar, sem nenhuma marca nem comentário</span><span>.docx</span></div><div class="item"><span>Sumário automático e número de página testados no seu programa</span><span>Word ou Docs</span></div></div></details>
+          <details data-previa="marcada"><summary>Versão marcada em Word</summary><div class="painel"><div class="item"><span>Cada alteração em controle de alterações</span><span>.docx</span></div><div class="item"><span>Comentário com a regra, o item e a edição</span><span>[REGRA]</span></div></div></details>
+          <details data-previa="pdf"><summary>PDF final</summary><div class="painel"><div class="item"><span>Para conferir em qualquer aparelho ou mandar ao orientador</span><span>.pdf</span></div></div></details>
+          <details data-previa="relatorio"><summary>Relatório de entrega</summary><div class="painel"><div class="item"><span>Regras usadas e de onde vieram</span><span>curso, faculdade, ABNT</span></div><div class="item"><span>Pendências suas e riscos formais</span><span>em lista</span></div></div></details>
+          <details data-previa="previa"><summary>Prévia antes do pagamento final</summary><div class="painel"><div class="item"><span>As duas versões em PDF com marca d’água</span><span>antes do saldo</span></div></div></details>
+          <details data-previa="ajustes"><summary>Uma rodada de ajustes</summary><div class="painel"><div class="item"><span>Na prévia ou em até 7 dias depois da entrega</span><span>incluída</span></div><div class="item"><span>Erro meu não conta como rodada</span><span>sem custo</span></div></div></details>
+        </div>
+      </div>
+      <div class="previa sobe" aria-hidden="true">
+        <div class="moldura" data-ui>
+          <div class="quadro-previa ativo" data-q="final"><span class="qp-titulo">SUMÁRIO</span><div class="qp-tabela"><span>1 INTRODUÇÃO</span><span>12</span><span>2 A IMPRENSA NAS PROVÍNCIAS</span><span>15</span><span>2.1 Circulação e correio</span><span>18</span><span>3 METODOLOGIA</span><span>24</span><span>4 RESULTADOS</span><span>31</span><span>REFERÊNCIAS</span><span>47</span></div></div>
+          <div class="quadro-previa" data-q="marcada"><span class="qp-titulo">2 A IMPRENSA NAS PROVÍNCIAS</span><p>Os jornais <span class="del">tinha</span><span class="ins">tinham</span> circulação restrita <span class="del">à</span><span class="ins">a</span> cidades do interior.</p><div class="qp-linha m"></div><div class="qp-linha"></div><div class="qp-linha c"></div><p style="background:var(--caneta-fundo);padding:8px 10px;font-size:14px"><b style="color:var(--caneta)">[REGRA]</b> Concordância: sujeito no plural.</p></div>
+          <div class="quadro-previa" data-q="pdf"><span class="qp-titulo">1 INTRODUÇÃO</span><div class="qp-linha m"></div><div class="qp-linha"></div><div class="qp-linha"></div><div class="qp-linha c"></div><div class="qp-linha m"></div><div class="qp-linha"></div><div class="qp-linha c"></div></div>
+          <div class="quadro-previa" data-q="relatorio"><span class="qp-titulo">RELATÓRIO DE ENTREGA</span><div class="qp-tabela"><span>Regras aplicadas</span><span>23</span><span>Divergências entre manuais</span><span>2</span><span>Pendências suas</span><span>4</span><span>Riscos formais</span><span>1</span></div></div>
+          <div class="quadro-previa" data-q="previa"><span class="qp-titulo">1 INTRODUÇÃO</span><div class="qp-linha m"></div><div class="qp-linha"></div><div class="qp-linha c"></div><div class="qp-linha m"></div><div class="qp-marca">PRÉVIA</div></div>
+          <div class="quadro-previa" data-q="ajustes"><span class="qp-titulo">AJUSTES PEDIDOS</span><div class="qp-tabela"><span>Correção sem custo (erro meu)</span><span>1</span><span>Rodada incluída</span><span>3</span><span>Fora do escopo</span><span>0</span></div></div>
+        </div>
+        <p class="legenda" id="legenda-previa">Versão final: o sumário sai automático, com as páginas certas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="processo faixa" id="processo">
+    <div class="miolo">
+      <div class="cab">
+        <h2>Como funciona</h2>
+        <div class="setas"><button type="button" id="voltar" aria-label="Voltar">←</button><button type="button" id="avancar" aria-label="Avançar">→</button></div>
+      </div>
+      <div class="progresso" aria-hidden="true"><span id="barra"></span></div>
+      <p class="arraste" aria-hidden="true">Arraste para o lado para ver as etapas →</p>
+    </div>
+    <div class="trilho" id="trilho" tabindex="0" aria-label="Etapas, da primeira mensagem à entrega">
+      <ol>
+        <li class="momento"><h3>Você manda o arquivo</h3><p>Word, faculdade, curso e data da banca. Respondo com preço e prazo.</p><div class="espaco e1"></div><div class="peca"><big>38 páginas</big>UCB, Administração. Banca em 28 de novembro.</div></li>
+        <li class="momento"><h3>Depois, o sinal</h3><p>Metade do valor por Pix reserva a vaga. A outra metade, só depois que você vir a prévia.</p><div class="espaco e2"></div><div class="peca"><big>50%</big>para começar, por Pix</div></li>
+        <li class="momento"><h3>Leio as regras</h3><p>Curso, faculdade e ABNT, com as divergências anotadas antes de mexer no texto.</p><div class="espaco e3"></div><div class="peca"><big>Curso</big>vem antes da faculdade, que vem antes da ABNT</div></li>
+        <li class="momento"><h3>Você vê a prévia</h3><p>As duas versões em PDF com marca d’água. A rodada de ajustes já vale aqui.</p><div class="espaco e4"></div><div class="peca"><big>Prévia</big>versão final e versão marcada</div></li>
+        <li class="momento"><h3>Saldo e entrega</h3><p>Com os outros 50%, você recebe os arquivos editáveis, o PDF e o relatório.</p><div class="espaco e5"></div><div class="peca"><big>4 arquivos</big>Word final, Word marcado, PDF e relatório</div></li>
+        <li class="momento"><h3>Ajustes por 7 dias</h3><p>Se o orientador pedir mudanças de forma, mande os comentários dele.</p><div class="espaco e6"></div><div class="peca"><big>7 dias</big>para a rodada de ajustes</div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="quem faixa" id="quem-faz">
+    <div class="miolo">
+      <h2 class="sobe">Quem faz</h2>
+      <div class="sobe">
+        <p class="frase">Eu leio o manual do seu curso antes de mexer em uma linha do seu texto.</p>
+        <p class="assinatura">Gustavo Rodrigues · formado em Jornalismo · Brasília, DF</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="precos faixa" id="precos">
+    <div class="miolo">
+      <div class="esq sobe">
+        <h2>Preços</h2>
+        <p>Conto só as páginas do texto, da Introdução até as Referências, em A4, fonte 12 e espaço 1,5. Capa, folha de rosto, resumo, sumário e anexos não entram. O prazo conta em dias úteis, a partir do pagamento do sinal e do envio de todo o material. O valor final eu confirmo ao abrir o seu arquivo, antes de você pagar qualquer coisa.</p>
+      </div>
+      <div class="tabelas">
+        <div class="bloco-preco sobe">
+          <h3>TCC, monografia e artigo</h3>
+          <table class="tabela">
+            <caption class="oculto">Preço e prazo de entrega por número de páginas</caption>
+            <thead><tr><th scope="col">Tamanho</th><th scope="col">Só formatação<small>R$ 3 por página</small></th><th scope="col">Formatação e revisão<small>R$ 6 por página</small></th></tr></thead>
+            <tbody>
+              <tr><th scope="row">40 páginas</th><td><span class="valor">R$ 120</span><span class="prazo">3 dias úteis</span></td><td><span class="valor">R$ 240</span><span class="prazo">5 dias úteis</span></td></tr>
+              <tr><th scope="row">80 páginas</th><td><span class="valor">R$ 240</span><span class="prazo">4 dias úteis</span></td><td><span class="valor">R$ 480</span><span class="prazo">7 dias úteis</span></td></tr>
+              <tr><th scope="row">120 páginas</th><td><span class="valor">R$ 360</span><span class="prazo">5 dias úteis</span></td><td><span class="valor">R$ 720</span><span class="prazo">9 dias úteis</span></td></tr>
+              <tr><th scope="row">Mais de 120</th><td><span class="valor">R$ 3/página</span><span class="prazo">prazo combinado</span></td><td><span class="valor">R$ 6/página</span><span class="prazo">prazo combinado</span></td></tr>
+            </tbody>
+          </table>
+          <p class="rodape-tab">Preço por página, sem valor mínimo; os tamanhos são exemplos. O prazo vale para a faixa: até 40, até 80 e até 120 páginas. Artigo científico sai pelo mesmo preço por página. A revisão cobre ortografia, gramática, pontuação, coesão e clareza, com correção mínima.</p>
+        </div>
+        <div class="bloco-preco sobe">
+          <h3>Urgência</h3>
+          <table class="tabela lista">
+            <caption class="oculto">Acréscimo para entrega urgente</caption>
+            <thead><tr><th scope="col">Entrega em</th><th scope="col">Acréscimo</th><th scope="col">Para quais trabalhos</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">48 horas</th><td class="num">+50%</td><td class="det">Formatação até 120 páginas, ou formatação e revisão até 40 páginas</td></tr>
+              <tr><th scope="row">24 horas</th><td class="num">+100%</td><td class="det">Só formatação, até 60 páginas</td></tr>
+            </tbody>
+          </table>
+          <p class="rodape-tab">As duas dependem de vaga na data.</p>
+        </div>
+        <div class="bloco-preco sobe">
+          <h3>Avulsos e adicionais</h3>
+          <table class="tabela lista">
+            <caption class="oculto">Serviços avulsos e adicionais</caption>
+            <thead><tr><th scope="col">Serviço</th><th scope="col">Valor</th><th scope="col">Detalhe</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Só referências e citações</th><td class="num">R$ 75</td><td class="det">Até 50 referências</td></tr>
+              <tr><th scope="row">Revisão do abstract</th><td class="num">R$ 30</td><td class="det">Texto em inglês escrito por você</td></tr>
+              <tr><th scope="row">Ajustes pedidos pela banca</th><td class="num">R$ 40 a 75</td><td class="det">Correções de forma</td></tr>
+              <tr><th scope="row">Slides da banca</th><td class="num">R$ 90 a 125</td><td class="det">Conteúdo seu, até 15 slides</td></tr>
+              <tr><th scope="row">Arquivo só em PDF</th><td class="num">+ R$ 40</td><td class="det">Preciso converter para Word antes de começar</td></tr>
+              <tr><th scope="row">Arquivo que exige mais trabalho</th><td class="num">+ R$ 30 a 40</td><td class="det">Mais de 30 referências fora do padrão, capa e páginas iniciais montadas do zero, mais de 15 figuras sem legenda ou arquivo com a formatação muito quebrada. Aparece no orçamento, antes de você pagar</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="lancamento sobe"><b>Sem valor mínimo.</b><span>Um TCC de 30 páginas sai por R$ 90 só com formatação, ou R$ 180 com revisão. <a href="#orcamento">Calcule o seu</a>.</span></div>
+    </div>
+  </section>
+
+  <section class="prova faixa" id="instituicoes">
+    <div class="cartao sobe">
+      <h2>Faculdades do DF com manual mapeado</h2>
+      <p class="nomes">UnB&nbsp;· CEUB&nbsp;· Universidade Católica de Brasília&nbsp;· IESB&nbsp;· UDF&nbsp;· UNICEPLAC&nbsp;· UNIP&nbsp;· IDP</p>
+      <details class="normas"><summary>Normas ABNT vigentes que eu uso</summary><p>NBR 14724:2024 trabalhos acadêmicos&nbsp;· NBR 6023:2025 referências&nbsp;· NBR 10520:2023 citações&nbsp;· NBR 6028:2021 resumo&nbsp;· NBR 6024:2012 seções&nbsp;· NBR 6027:2012 sumário</p></details>
+      <p class="pedido">Sempre peço o manual ou o modelo do seu curso e da sua faculdade, para um resultado mais preciso e confiável. Se a sua faculdade do DF não está aqui, mande junto com o arquivo.</p>
+    </div>
+  </section>
+
+  <section class="perguntas faixa" id="perguntas">
+    <div class="miolo">
+      <div class="cab-faq sobe">
+        <h2>Perguntas</h2>
+        <p>Não achou a sua dúvida? <a data-whats href="https://wa.me/5561900000000" target="_blank" rel="noopener">Pergunte no WhatsApp</a>.</p>
+      </div>
+      <div class="faq">
+        <div class="faq-grupo sobe">
+          <h3>O que eu faço e o que não faço</h3>
+          <div class="faq-lista">
+            <details><summary>Você escreve ou reescreve partes do trabalho?</summary><p>Não. Faço formatação e revisão do texto que você escreveu, com correção mínima, sem mudar suas ideias nem seu jeito de escrever.</p></details>
+            <details><summary>E se faltar dado em uma referência?</summary><p>Eu não completo de memória. O que faltar vira um comentário [PENDENTE] para você conferir na fonte.</p></details>
+            <details><summary>Você mexe em citações ou dados da pesquisa?</summary><p>Não. Citação direta, fala de entrevistado e tabela de dados ficam como estão. Se eu vir um problema, aviso em comentário.</p></details>
+            <details><summary>Você garante a aprovação?</summary><p>Não. Ninguém pode prometer nota ou aprovação. O que garanto é a forma conferida e as pendências apontadas por escrito.</p></details>
+          </div>
+        </div>
+        <div class="faq-grupo sobe">
+          <h3>Seu arquivo</h3>
+          <div class="faq-lista">
+            <details><summary>Meu trabalho está no Google Docs. Serve?</summary><p>Serve. Pergunto em qual programa você vai abrir o arquivo e testo nele, porque número de página e sumário se comportam diferente no Word e no Docs.</p></details>
+            <details><summary>Só tenho o PDF.</summary><p>Preciso do arquivo editável. Se só existir o PDF, dá para converter, com o adicional informado no orçamento.</p></details>
+            <details><summary>Meu manual usa uma versão antiga da ABNT.</summary><p>É comum. Sigo o manual do curso no que ele define, sem misturar edições, e aviso onde ele difere da norma vigente.</p></details>
+            <details><summary>Meu trabalho é em LaTeX, APA ou Vancouver.</summary><p>Fica fora do padrão. Me chame no WhatsApp que eu digo se consigo fazer e por quanto.</p></details>
+          </div>
+        </div>
+        <div class="faq-grupo sobe">
+          <h3>Depois da entrega</h3>
+          <div class="faq-lista">
+            <details><summary>E se o orientador pedir mudanças depois?</summary><p>A rodada de ajustes de forma vale por 7 dias após a entrega. Depois disso, ajustes pedidos pela banca saem de R$ 40 a R$ 75.</p></details>
+            <details><summary>E se você errar uma regra?</summary><p>Se eu deixar de aplicar uma regra formal que estava no manual, no modelo ou no escopo combinado, corrijo sem custo adicional.</p></details>
+          </div>
+        </div>
+        <div class="faq-grupo sobe">
+          <h3>IA, privacidade e atendimento</h3>
+          <div class="faq-lista">
+            <details><summary>Você usa inteligência artificial?</summary><p>Sim, como apoio na formatação e na revisão. Toda alteração passa por conferência humana, e a versão marcada mostra cada uma.</p></details>
+            <details><summary>O que acontece com o meu arquivo?</summary><p>Uso o arquivo só para fazer o seu trabalho. Ferramentas de IA processam o texto como apoio, e toda alteração passa por mim. Depois do prazo de ajustes, apago as cópias. Exemplo de portfólio só com a sua autorização e sem dados pessoais.</p></details>
+            <details><summary>Atende fora do DF?</summary><p>Por enquanto, só alunos de faculdades do DF.</p></details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="convite faixa" id="orcamento">
+    <div class="miolo">
+      <div class="chamado sobe">
+        <h2>Seu orçamento</h2>
+        <p><b>Atendimento pausado.</b> A calculadora continua aqui para mostrar como o preço e o prazo são calculados, mas o envio do orçamento está desativado.</p>
+        <div class="contato">
+          <span>Prefere falar direto?</span>
+          <span class="numero" id="numero">+55 (61) 90000-0000</span>
+          <button class="copiar" id="copiar" type="button">Copiar número</button>
+        </div>
+      </div>
+      <form class="cartao-resposta" id="calc" novalidate>
+        <h3>Calcule o seu!</h3>
+        <div class="campos">
+          <fieldset class="campo largo">
+            <legend>Serviço</legend>
+            <div class="opcoes">
+              <label><input type="radio" name="servico" value="form" checked><span>Formatação · R$ 3/página</span></label>
+              <label><input type="radio" name="servico" value="rev"><span>Formatação e revisão · R$ 6/página</span></label>
+            </div>
+          </fieldset>
+          <div class="campo">
+            <label for="paginas">Número de páginas</label>
+            <input id="paginas" name="paginas" type="number" inputmode="numeric" min="1" max="600" placeholder="Ex.: 38">
+            <span class="dica">Conte só as páginas do texto: da Introdução até as Referências. Capa, folha de rosto, resumo, sumário e anexos não entram. Não sabe quantas são? Veja o número de palavras no canto de baixo do Word e divida por 350.</span>
+          </div>
+          <div class="campo">
+            <label for="tipo">Tipo de trabalho</label>
+            <div class="seta"><select id="tipo" name="tipo">
+              <option>TCC ou monografia</option><option>Artigo científico</option><option>Dissertação</option><option>Outro</option>
+            </select></div>
+          </div>
+          <div class="campo">
+            <label for="faculdade">Faculdade</label>
+            <div class="seta"><select id="faculdade" name="faculdade">
+              <option value="">Escolha</option><option>UnB</option><option>CEUB</option><option>UCB</option><option>IESB</option><option>UDF</option><option>UNICEPLAC</option><option>UNIP</option><option>IDP</option><option>Outra faculdade do DF</option>
+            </select></div>
+          </div>
+          <div class="campo">
+            <label for="curso">Curso</label>
+            <input id="curso" name="curso" type="text" autocomplete="off" placeholder="Ex.: Administração">
+          </div>
+          <div class="campo">
+            <label for="banca">Data da entrega ou da banca</label>
+            <input id="banca" name="banca" type="date">
+          </div>
+          <div class="campo">
+            <label for="arquivo">Seu arquivo está em</label>
+            <div class="seta"><select id="arquivo" name="arquivo">
+              <option value="word">Word (.docx)</option><option value="docs">Google Docs</option><option value="pdf">Só PDF (+ R$ 40)</option>
+            </select></div>
+          </div>
+          <fieldset class="campo largo">
+            <legend>Prazo</legend>
+            <div class="opcoes">
+              <label><input type="radio" name="urgencia" value="normal" checked><span>Normal</span></label>
+              <label><input type="radio" name="urgencia" value="48" id="urg48"><span>48 horas · +50%</span></label>
+              <label><input type="radio" name="urgencia" value="24" id="urg24"><span>24 horas · +100%</span></label>
+            </div>
+            <span class="dica">48 horas: formatação até 120 páginas, ou formatação e revisão até 40 páginas. 24 horas: só formatação, até 60 páginas. As duas dependem de eu ter horário livre na data.</span>
+          </fieldset>
+          <div class="campo largo">
+            <label for="nome">Seu nome</label>
+            <input id="nome" name="nome" type="text" autocomplete="given-name" placeholder="Opcional">
+          </div>
+        </div>
+        <div class="resultado" aria-live="polite">
+          <span class="valor" id="r-valor">R$ 0,00</span>
+          <div class="linhas">
+            <div><span>Cálculo</span><span id="r-conta">informe as páginas</span></div>
+            <div><span>Prazo</span><span id="r-prazo">a calcular</span></div>
+            <div><span>Se começar hoje, fica pronto até</span><span id="r-data">a calcular</span></div>
+            <div><span>Pagamento</span><span id="r-pag">a calcular</span></div>
+          </div>
+          <span class="aviso" id="r-aviso"></span>
+          <span class="nota">Valor estimado. Confirmo depois de abrir o arquivo; se houver algum adicional (referências muito fora do padrão, capa montada do zero), ele aparece antes de você pagar. A outra metade só é paga depois que você vir a prévia. Atendimento pausado: o envio está desativado.</span>
+        </div>
+        <a class="botao" id="enviar" target="_blank" rel="noopener" aria-disabled="true" tabindex="-1">Enviar este orçamento no WhatsApp</a>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="verso faixa">
+  <div class="papel">
+    <svg class="recorte" aria-hidden="true" focusable="false"><defs><pattern id="vieira" width="100" height="25" patternUnits="userSpaceOnUse"><path d="M0 25 A50 25 0 0 1 100 25 Z" fill="#f1f1f1"/></pattern></defs><rect width="100%" height="25" fill="url(#vieira)"/></svg>
+    <div class="msg">
+      <h2>Seu texto. Sua autoria. No padrão certo.</h2>
+      <p>Seu texto continua seu. Formatação e revisão de trabalhos acadêmicos para alunos do Distrito Federal.</p>
+    </div>
+    <div class="enderecos">
+      <a data-whats href="https://wa.me/5561900000000" target="_blank" rel="noopener">WhatsApp +55 (61) 90000-0000</a>
+      <a href="#orcamento">Calcular orçamento</a>
+      <a href="#precos">Preços e prazos</a>
+      <a href="#perguntas">Perguntas</a>
+      <span>Brasília, Distrito Federal</span>
+    </div>
+    <p class="imprenta">© 2026 Autoria em Forma · Revisão e normalização acadêmica · Sem certificação nem vínculo com a ABNT</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var msg = encodeURIComponent("Oi! Vi a página da Autoria em Forma e quero um orçamento. Faculdade/curso: , páginas: , data da banca: ");
+  document.querySelectorAll("[data-whats]").forEach(function (a) { a.href = "https://wa.me/5561900000000?text=" + msg; });
+
+  // folha A4: versão marcada × versão final
+  var a4 = document.getElementById("a4"), bM = document.getElementById("ver-marcada"), bF = document.getElementById("ver-final");
+  function ver(v) { a4.setAttribute("data-versao", v); bM.setAttribute("aria-pressed", v === "marcada"); bF.setAttribute("aria-pressed", v === "final"); }
+  bM.addEventListener("click", function () { ver("marcada"); });
+  bF.addEventListener("click", function () { ver("final"); });
+
+  // entrega: índice com prévia
+  var legendas = {
+    final: "Versão final: o sumário sai automático, com as páginas certas.",
+    marcada: "Versão marcada: o que mudou, riscado e destacado, com a regra ao lado.",
+    pdf: "PDF final: o mesmo arquivo, pronto para qualquer aparelho.",
+    relatorio: "Relatório: o que foi aplicado, o que diverge e o que depende de você.",
+    previa: "Prévia: você confere tudo antes de pagar o saldo.",
+    ajustes: "Ajustes: cada pedido separado entre erro meu, rodada incluída e fora do escopo."
+  };
+  var quadros = document.querySelectorAll(".quadro-previa"), legenda = document.getElementById("legenda-previa");
+  function previa(q) {
+    quadros.forEach(function (el) { el.classList.toggle("ativo", el.getAttribute("data-q") === q); });
+    legenda.textContent = legendas[q] || "";
+  }
+  document.querySelectorAll(".barras details").forEach(function (d) {
+    var q = d.getAttribute("data-previa");
+    d.addEventListener("mouseenter", function () { previa(q); });
+    d.addEventListener("focusin", function () { previa(q); });
+    d.addEventListener("toggle", function () { if (d.open) previa(q); });
+  });
+
+  // processo: setas e barra de progresso
+  var trilho = document.getElementById("trilho"), barra = document.getElementById("barra");
+  function progresso() {
+    var max = trilho.scrollWidth - trilho.clientWidth;
+    var vis = trilho.clientWidth / trilho.scrollWidth;
+    var p = max > 0 ? trilho.scrollLeft / max : 1;
+    barra.style.width = Math.max(vis, vis + (1 - vis) * p) * 100 + "%";
+  }
+  trilho.addEventListener("scroll", progresso, { passive: true });
+  window.addEventListener("resize", progresso);
+  progresso();
+  document.getElementById("avancar").addEventListener("click", function () { trilho.scrollBy({ left: 312, behavior: "smooth" }); });
+  document.getElementById("voltar").addEventListener("click", function () { trilho.scrollBy({ left: -312, behavior: "smooth" }); });
+
+  // copiar número
+  var copiar = document.getElementById("copiar"), numero = document.getElementById("numero");
+  copiar.addEventListener("click", function () {
+    function selecionar() { var r = document.createRange(); r.selectNodeContents(numero); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); copiar.textContent = "Selecionado: copie com Ctrl+C"; }
+    try { navigator.clipboard.writeText("+5561900000000").then(function () { copiar.textContent = "Número copiado"; setTimeout(function () { copiar.textContent = "Copiar número"; }, 2000); }, selecionar); } catch (e) { selecionar(); }
+  });
+
+  // calculadora de orçamento. Fonte dos valores: 02_Tabela_Precos_Prazos_Escopo.md (v1.4). Mudou o 02, muda aqui.
+  var TABELA = {
+    porPagina: { form: 3, rev: 6 },
+    prazo: { form: [[40, 3], [80, 4], [120, 5]], rev: [[40, 5], [80, 7], [120, 9]] },
+    urgencia: { normal: 1, "48": 1.5, "24": 2 },
+    limite48: { form: 120, rev: 40 },
+    limite24: { form: 60, rev: 0 },
+    adicionalPdf: 40,
+    maxPaginas: 600
+  };
+  var form = document.getElementById("calc");
+  var el = function (id) { return document.getElementById(id); };
+  var reais = function (n) { return n.toLocaleString("pt-BR", { style: "currency", currency: "BRL" }); };
+  var dataBR = function (d) { return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "numeric" }); };
+  function maisDiasUteis(d, n) { var r = new Date(d); while (n > 0) { r.setDate(r.getDate() + 1); var w = r.getDay(); if (w !== 0 && w !== 6) n--; } return r; }
+  function valorDe(nome) { var x = form.querySelector('input[name="' + nome + '"]:checked'); return x ? x.value : ""; }
+
+  function calcular() {
+    var servico = valorDe("servico"), urg = valorDe("urgencia");
+    var pag = Math.floor(Number(el("paginas").value));
+    var u24 = el("urg24"), u48 = el("urg48");
+    u24.disabled = pag > TABELA.limite24[servico];
+    u48.disabled = pag > TABELA.limite48[servico];
+    if ((urg === "24" && u24.disabled) || (urg === "48" && u48.disabled)) {
+      urg = !u48.disabled ? "48" : "normal";
+      form.querySelector('input[name="urgencia"][value="' + urg + '"]').checked = true;
+    }
+    var enviar = el("enviar");
+    var PAUSADO = true; // atendimento pausado (nov/2026): calcula, mas não habilita o envio
+    function bloquear(msg) {
+      el("r-valor").textContent = "R$ 0,00"; el("r-conta").textContent = msg;
+      ["r-prazo", "r-data", "r-pag"].forEach(function (k) { el(k).textContent = "a calcular"; });
+      el("r-aviso").textContent = "";
+      enviar.removeAttribute("href"); enviar.setAttribute("aria-disabled", "true"); enviar.setAttribute("tabindex", "-1");
+    }
+    if (!pag || pag < 1) { bloquear("informe as páginas"); return; }
+    if (pag > TABELA.maxPaginas) { bloquear("acima de " + TABELA.maxPaginas + " páginas: me chame no WhatsApp"); return; }
+    var por = TABELA.porPagina[servico];
+    var base = pag * por * TABELA.urgencia[urg];
+    var extra = el("arquivo").value === "pdf" ? TABELA.adicionalPdf : 0;
+    var total = base + extra;
+    var conta = pag + " × " + reais(por) + (urg !== "normal" ? " + urgência" : "") + (extra ? " + PDF" : "");
+    var prazoTxt, pronto = null, hoje = new Date();
+    if (urg === "48") { prazoTxt = "48 horas"; pronto = new Date(hoje.getTime() + 48 * 3600 * 1000); }
+    else if (urg === "24") { prazoTxt = "24 horas"; pronto = new Date(hoje.getTime() + 24 * 3600 * 1000); }
+    else {
+      var faixa = TABELA.prazo[servico].filter(function (f) { return pag <= f[0]; })[0];
+      if (faixa) { prazoTxt = faixa[1] + " dias úteis"; pronto = maisDiasUteis(hoje, faixa[1]); }
+      else prazoTxt = "a combinar (mais de 120 páginas)";
+    }
+    var pagTxt = "sinal de " + reais(total / 2) + ", resto depois da prévia";
+    var aviso = "";
+    var banca = el("banca").value ? new Date(el("banca").value + "T23:59:00") : null;
+    if (banca && banca < hoje) aviso = "Essa data já passou. Confira o dia e o ano.";
+    else if (banca && pronto) {
+      if (pronto > banca) aviso = urg === "normal" ? "No prazo normal, fica pronto depois da sua data. Veja a opção de 48 horas ou me chame para checar a vaga." : "Mesmo com urgência, a data está apertada. Me chame antes de fechar.";
+    }
+    el("r-valor").textContent = reais(total);
+    el("r-conta").textContent = conta;
+    el("r-prazo").textContent = prazoTxt;
+    el("r-data").textContent = pronto ? dataBR(pronto) : "a combinar";
+    el("r-pag").textContent = pagTxt;
+    el("r-aviso").textContent = aviso;
+
+    var linhas = [
+      "Oi! Fiz o orçamento no site da Autoria em Forma.",
+      el("nome").value.trim() ? "Nome: " + el("nome").value.trim() : "",
+      "Trabalho: " + el("tipo").value + (el("faculdade").value ? " · " + el("faculdade").value : "") + (el("curso").value.trim() ? " · " + el("curso").value.trim() : ""),
+      "Serviço: " + (servico === "rev" ? "formatação e revisão" : "formatação"),
+      "Páginas: " + pag,
+      "Arquivo: " + el("arquivo").options[el("arquivo").selectedIndex].text.replace(/ \(.*\)$/, ""),
+      "Data da entrega/banca: " + (el("banca").value ? dataBR(new Date(el("banca").value + "T12:00:00")) : "não informada"),
+      "Prazo escolhido: " + prazoTxt,
+      "Valor estimado: " + reais(total),
+      "Posso mandar o arquivo?"
+    ].filter(Boolean).join("\n");
+    if (!PAUSADO) {
+      enviar.href = "https://wa.me/5561900000000?text=" + encodeURIComponent(linhas);
+      enviar.setAttribute("aria-disabled", "false"); enviar.removeAttribute("tabindex");
+    }
+  }
+  form.addEventListener("input", calcular);
+  form.addEventListener("change", calcular);
+  form.addEventListener("submit", function (e) { e.preventDefault(); });
+  calcular();
+
+  // entrada: as partes de cada seção sobem ao entrar na tela (o conteúdo nunca fica escondido)
+  var reduzir = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduzir && "IntersectionObserver" in window) {
+    var alvos = document.querySelectorAll(".sobe");
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove("espera"); io.unobserve(e.target); } });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    var grupos = new Map();
+    alvos.forEach(function (el) {
+      var sec = el.closest("section, header") || document.body;
+      var i = grupos.get(sec) || 0; grupos.set(sec, i + 1);
+      el.style.transitionDelay = Math.min(i, 6) * 75 + "ms";
+      el.classList.add("espera");
+      io.observe(el);
+    });
+  }
+})();
+</script>
+
+<script>
+// Barra flutuante: aparece quando as abas da capa saem da tela e marca a seção em que a pessoa está.
+(function () {
+  var nav = document.getElementById("navfixa"), pastas = document.querySelector(".pastas");
+  if (!nav || !pastas) return;
+  var links = Array.prototype.slice.call(nav.querySelectorAll("[data-alvo]"));
+  var alvos = links.map(function (a) { return document.getElementById(a.getAttribute("data-alvo")); });
+  var pendente = false;
+  function atualizar() {
+    pendente = false;
+    var topoAbas = pastas.getBoundingClientRect().top;
+    nav.classList.toggle("visivel", topoAbas < 0);
+    var linha = window.innerHeight * 0.35, atual = -1;
+    alvos.forEach(function (el, i) { if (el && el.getBoundingClientRect().top <= linha) atual = i; });
+    links.forEach(function (a, i) { if (i === atual) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+    var ativo = links[atual];
+    if (ativo && nav.scrollWidth > nav.clientWidth) {
+      var l = ativo.offsetLeft, r = l + ativo.offsetWidth;
+      if (l < nav.scrollLeft || r > nav.scrollLeft + nav.clientWidth) nav.scrollTo({ left: l - 8, behavior: "smooth" });
+    }
+  }
+  function agendar() { if (!pendente) { pendente = true; requestAnimationFrame(atualizar); } }
+  window.addEventListener("scroll", agendar, { passive: true });
+  window.addEventListener("resize", agendar);
+  atualizar();
+})();
+</script>
+
+<script>
+// Contador de acessos (analytics/worker.js). Só roda no site publicado, não usa cookie
+// e não envia dado pessoal: tipo do evento, origem do link e domínio de quem mandou.
+// ?eu=1 marca o navegador como do dono (não conta mais); ?eu=0 desfaz.
+(function () {
+  if (!/autoriaemforma\./.test(location.hostname)) return;
+  var ls, ss;
+  try { ls = window.localStorage; ss = window.sessionStorage; } catch (e) { return; }
+  var q = new URLSearchParams(location.search);
+  var sujo = ["origem", "utm_source", "utm_medium", "utm_campaign", "eu"].some(function (k) { return q.has(k); });
+  try {
+    if (q.get("eu") === "1") ls.setItem("af_eu", "1");
+    if (q.get("eu") === "0") ls.removeItem("af_eu");
+  } catch (e) {}
+  var orig = null;
+  try { orig = JSON.parse(ss.getItem("af_o") || "null"); } catch (e) {}
+  if (!orig) {
+    orig = { o: q.get("origem") || q.get("utm_source") || "", r: document.referrer || "" };
+    try { ss.setItem("af_o", JSON.stringify(orig)); } catch (e) {}
+  }
+  // tira a marca do endereço, para quem copiar o link não herdar a origem
+  if (sujo && window.history && history.replaceState) {
+    ["origem", "utm_source", "utm_medium", "utm_campaign", "eu"].forEach(function (k) { q.delete(k); });
+    var resto = q.toString();
+    history.replaceState(null, "", location.pathname + (resto ? "?" + resto : "") + location.hash);
+  }
+  var meu = false;
+  try { meu = !!ls.getItem("af_eu"); } catch (e) {}
+  if (meu) return;
+
+  function enviar(t, extra) {
+    try { if (ss.getItem("af_" + t)) return; ss.setItem("af_" + t, "1"); } catch (e) {}
+    var d = { t: t, o: orig.o, r: orig.r };
+    if (extra) for (var k in extra) d[k] = extra[k];
+    var corpo = JSON.stringify(d);
+    try { if (navigator.sendBeacon && navigator.sendBeacon("/api/e", new Blob([corpo], { type: "text/plain" }))) return; } catch (e) {}
+    try { fetch("/api/e", { method: "POST", body: corpo, keepalive: true }); } catch (e) {}
+  }
+  var por = function (sel, ev, fn) { document.querySelectorAll(sel).forEach(function (el) { el.addEventListener(ev, fn); }); };
+
+  enviar("visita");
+  var precos = document.getElementById("precos");
+  if (precos && "IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { enviar("viu_precos"); io.disconnect(); } }, { threshold: 0.25 });
+    io.observe(precos);
+  }
+  por("#calc", "input", function () { if (Number(document.getElementById("paginas").value) > 0) enviar("calc_inicio"); });
+  por("#enviar", "click", function () {
+    var b = document.getElementById("enviar");
+    if (b.getAttribute("aria-disabled") === "true") return;
+    var serv = document.querySelector('#calc input[name="servico"]:checked');
+    enviar("calc_enviar", { s: serv ? serv.value : "", f: document.getElementById("faculdade").value, p: document.getElementById("paginas").value });
+  });
+  por("[data-whats]", "click", function () { enviar("whats_direto"); });
+  por("#copiar", "click", function () { enviar("copiar_numero"); });
+  por("#ver-final, #avancar, #voltar", "click", function () { enviar("exemplo"); });
+})();
+</script>

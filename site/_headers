@@ -1,0 +1,8 @@
+# Gerado por pagina/gerar_site.py. Não editar à mão.
+/*
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-5q1ZF2ITyTnjpfEiBj8P0qqHGWlgPMpFFzfH8dpGRs0=' 'sha256-8WvJIiIOOTZpjsN0RiJlmT63A2e0a99I+ByJwHmf8tI=' 'sha256-J4zpJOMK7CwGMTvx8WhLDt1YE+Xo/CoBt35gqJQd9s0='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin

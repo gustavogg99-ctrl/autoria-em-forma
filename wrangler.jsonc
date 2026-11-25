@@ -1,0 +1,32 @@
+// Publicação da página de apresentação na Cloudflare (Worker "site").
+// A pasta site/ é servida como arquivos estáticos. O código em analytics/worker.js só roda
+// nas rotas /api/* (coleta de eventos) e /painel (painel de acessos com senha).
+// Os scripts do pipeline nunca são publicados.
+{
+  "name": "site",
+  "main": "analytics/worker.js",
+  "compatibility_date": "2025-09-01",
+  "assets": {
+    "directory": "./site",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*", "/painel", "/painel/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "autoria-analytics",
+      "database_id": "cf48a840-8bda-486c-b274-43cfa13ab75d"
+    }
+  ],
+  // PAINEL_HASH (SHA-256 da senha do /painel) é um Secret, criado no painel da Cloudflare
+  // (Workers > site > Settings > Variables and Secrets), fora do repositório desde 22/10/2026.
+  // Sem ele, o /painel recusa qualquer senha.
+  // Limites por visitante (IP só como chave em memória, nunca gravado). Período: 10 ou 60 s.
+  // Uma visita real manda no máximo 7 eventos; o painel abre poucas vezes por minuto.
+  "ratelimits": [
+    { "name": "LIMITE_EVENTOS", "namespace_id": "1001", "simple": { "limit": 20, "period": 60 } },
+    { "name": "LIMITE_PAINEL", "namespace_id": "1002", "simple": { "limit": 10, "period": 60 } }
+  ],
+  "workers_dev": true,
+  "preview_urls": false
+}
