@@ -1,9 +1,11 @@
-"""Molde de spec para TCC (monografia) no padrão do Manual IESB 2024.
+"""Molde de spec para TCC (monografia).
 
 Copiar para entrada/spec_<cliente>.py (fora do repositório), preencher IDX com os índices do
 original (dump dos parágrafos: ver README) e escrever as correções de revisão de cada parágrafo.
-Os comentários abaixo são os textos-padrão das regras do Manual IESB 2024 e de decisões típicas de
-curso (ver docs/09_decisoes_por_curso_exemplo.md); conferir se valem para o curso do cliente.
+Os comentários abaixo são textos-padrão das regras do manual de uma instituição do DF já mapeada
+(citada como [INSTITUIÇÃO], com os números de item desse manual) e de decisões típicas de curso
+(ver docs/09_decisoes_por_curso_exemplo.md). Antes de usar: trocar [INSTITUIÇÃO] e os números de
+item pelos do manual do cliente e conferir se cada regra vale para o curso dele.
 
 Uso:
   python3 -I entrada/spec_<cliente>.py saida/<cliente>_MARCADO.docx [entrada/paginas.json]
@@ -36,64 +38,64 @@ SEM_QUEBRA = {"pageBreakBefore": '<w:pageBreakBefore w:val="0"/>'}
 CENTRO = {"jc": '<w:jc w:val="center"/>'}
 ALINEA = {"numPr": '<w:numPr><w:ilvl w:val="0"/><w:numId w:val="1"/></w:numPr>'}
 
-# ------------------------------------------------ comentários-padrão (06, 3.11) — IESB
-C_CAPA = ("[REGRA] Capa refeita no modelo IESB (Manual IESB 2024, 3.1.1 e Fig. 11): instituição no topo, autor, "
+# ------------------------------------------------ comentários-padrão (06, 3.11) — [INSTITUIÇÃO]
+C_CAPA = ("[REGRA] Capa refeita no modelo da [INSTITUIÇÃO] (Manual [INSTITUIÇÃO], 3.1.1 e Fig. 11): instituição no topo, autor, "
           "título em negrito com o subtítulo na linha de baixo, em minúsculas e sem negrito, e local e ano no pé "
           "da folha. A4, margens 3 cm (superior e esquerda) e 2 cm (inferior e direita), Times New Roman 12 "
           "(Manual 2.1 b, c e e).")
-C_ROSTO = ("[REGRA] Folha de rosto no modelo IESB (Manual 3.2.1.1.1 e Fig. 14): natureza do trabalho e "
+C_ROSTO = ("[REGRA] Folha de rosto no modelo da [INSTITUIÇÃO] (Manual 3.2.1.1.1 e Fig. 14): natureza do trabalho e "
            "orientador a 8 cm da margem esquerda, em espaço simples (Manual 2.2 b e d). Texto da natureza mantido.")
-C_ROSTO_LOCAL = ("[REGRA] A folha de rosto precisa de local e ano (Manual IESB 3.2.1.1.1 g e h). Acrescentei "
+C_ROSTO_LOCAL = ("[REGRA] A folha de rosto precisa de local e ano (Manual [INSTITUIÇÃO] 3.2.1.1.1 g e h). Acrescentei "
                  "iguais aos da capa.")
-C_APROVACAO = ("[PENDENTE] A folha de aprovação é obrigatória e não existia (Manual IESB 3.2.1.3). Montei no "
+C_APROVACAO = ("[PENDENTE] A folha de aprovação é obrigatória e não existia (Manual [INSTITUIÇÃO] 3.2.1.3). Montei no "
                "modelo (Fig. 17), sem a instituição dos membros da banca, que é a prática dos TCCs aprovados do "
                "curso. Falta o nome e a titulação do membro convidado. Data e assinaturas ficam em branco até a "
                "defesa (Manual 3.2.1.3).")
 C_AGRAD = ("[REGRA] Agradecimentos passaram para antes do resumo: a ordem é folha de rosto, folha de "
-           "aprovação, dedicatória, agradecimentos, epígrafe, resumo, abstract e sumário (Manual IESB 3.2.1; "
+           "aprovação, dedicatória, agradecimentos, epígrafe, resumo, abstract e sumário (Manual [INSTITUIÇÃO] 3.2.1; "
            "NBR 14724).")
 C_RESUMO = ("[REGRA] Resumo e abstract em folhas próprias, com título centralizado, parágrafo único e espaço "
-            "simples (Manual IESB 3.2.1.7 e 3.2.1.8). Texto mantido.")
-C_PCHAVE_SEP = ("[DIVERGÊNCIA] O Manual IESB 2024 (3.2.1.7) pede as palavras-chave \"separadas entre si por "
+            "simples (Manual [INSTITUIÇÃO] 3.2.1.7 e 3.2.1.8). Texto mantido.")
+C_PCHAVE_SEP = ("[DIVERGÊNCIA] O Manual [INSTITUIÇÃO] (3.2.1.7) pede as palavras-chave \"separadas entre si por "
                 "ponto\"; a NBR 6028:2021 usa ponto e vírgula. Vale o manual da instituição, que fica acima da "
                 "ABNT. Depois do ponto, cada termo começa com maiúscula. Mesmo ajuste nas keywords. Se o "
                 "orientador preferir ponto e vírgula, eu volto.")
-C_PCHAVE_QTD = ("[DECIDIR] O Manual IESB (3.2.1.7) pede de 3 a 5 palavras-chave. Escolha qual sai (a mesma nas "
+C_PCHAVE_QTD = ("[DECIDIR] O Manual [INSTITUIÇÃO] (3.2.1.7) pede de 3 a 5 palavras-chave. Escolha qual sai (a mesma nas "
                 "keywords). Não tirei nenhuma porque a escolha é sua.")
 C_SUMARIO = ("[REGRA] O sumário digitado virou sumário automático, com pontilhado e número de página, gerado a "
-             "partir dos títulos do texto (Manual IESB 3.2.1.13; NBR 6027). Se mexer no trabalho, atualize: "
+             "partir dos títulos do texto (Manual [INSTITUIÇÃO] 3.2.1.13; NBR 6027). Se mexer no trabalho, atualize: "
              "botão direito no sumário → Atualizar campo → Atualizar o índice inteiro.")
 C_FORMATO_TEXTO = ("[REGRA] Formatação do texto: Times New Roman 12, espaço 1,5, parágrafo com recuo de "
                    "1,25 cm e justificado, sem espaço extra entre parágrafos; cada seção primária começa em "
-                   "página nova, e os títulos ficam separados do texto por um espaço de 1,5 (Manual IESB 2.1, "
+                   "página nova, e os títulos ficam separados do texto por um espaço de 1,5 (Manual [INSTITUIÇÃO] 2.1, "
                    "2.2 e 2.3.1 c). Número de página no canto superior direito, a partir daqui, contando desde "
                    "a folha de rosto (Manual 2.4). Ele fica no cabeçalho, não no rodapé.")
-C_PONTO_SECAO = ("[REGRA] Sem ponto depois do número da seção (Manual IESB 2.3.1 a: \"Não deve ser usado nenhum "
+C_PONTO_SECAO = ("[REGRA] Sem ponto depois do número da seção (Manual [INSTITUIÇÃO] 2.3.1 a: \"Não deve ser usado nenhum "
                  "sinal (ponto, hífen, etc) para separar o indicativo numérico do título da seção\"). Corrigido "
                  "em todos os títulos.")
-C_SIGLA = ("[REGRA] Sigla na primeira vez que aparece: nome por extenso e sigla entre parênteses (Manual IESB "
+C_SIGLA = ("[REGRA] Sigla na primeira vez que aparece: nome por extenso e sigla entre parênteses (Manual [INSTITUIÇÃO] "
            "2.5).")
-C_ALINEAS = ("[DIVERGÊNCIA] Objetivos específicos em alíneas com letra, a), b), c)... (Manual IESB 2.3.2 a). "
+C_ALINEAS = ("[DIVERGÊNCIA] Objetivos específicos em alíneas com letra, a), b), c)... (Manual [INSTITUIÇÃO] 2.3.2 a). "
              "Inicial maiúscula e ponto final em cada item seguem a orientação da coordenação do curso, que "
              "prevalece sobre o manual da biblioteca (2.3.2 c pede minúscula e ponto e vírgula).")
 C_CITACAO_LONGA = ("[REGRA] Citação com mais de três linhas: recuo de 4 cm, fonte 10, espaço simples e sem "
-                   "aspas (Manual IESB 5.1.1). A pontuação final segue a NBR 10520:2002, adotada pelo curso. "
+                   "aspas (Manual [INSTITUIÇÃO] 5.1.1). A pontuação final segue a NBR 10520:2002, adotada pelo curso. "
                    "O texto citado não foi alterado.")
-C_QUADRO = ("[REGRA] Quadro com título acima e fonte abaixo, os dois em fonte 10 e espaço simples (Manual IESB "
+C_QUADRO = ("[REGRA] Quadro com título acima e fonte abaixo, os dois em fonte 10 e espaço simples (Manual [INSTITUIÇÃO] "
             "2.1 e, 2.2 b e 2.7 b e c). Conteúdo não foi alterado; o cabeçalho se repete se passar de página.")
-C_REFS = ("[REGRA] REFERÊNCIAS sem número e centralizado (Manual IESB 2.3.3). Lista alinhada à esquerda, em "
+C_REFS = ("[REGRA] REFERÊNCIAS sem número e centralizado (Manual [INSTITUIÇÃO] 2.3.3). Lista alinhada à esquerda, em "
           "espaço simples, com uma linha em branco entre as referências (Manual 6.2 c; o 2.2 c fala em espaço "
           "duplo, contradição interna do manual).")
-C_DUAS_EDITORAS = "[REGRA] Duas editoras do mesmo local ficam separadas por dois-pontos (Manual IESB 6.3.5)."
+C_DUAS_EDITORAS = "[REGRA] Duas editoras do mesmo local ficam separadas por dois-pontos (Manual [INSTITUIÇÃO] 6.3.5)."
 C_CAPITULO_PAGINAS = ("[PENDENTE] Capítulo de livro precisa das páginas inicial e final no fim da referência "
-                      "(Manual IESB 6.4.1.2 a). Me mande as páginas.")
+                      "(Manual [INSTITUIÇÃO] 6.4.1.2 a). Me mande as páginas.")
 C_TRADUTOR = ("[DECIDIR] Só esta referência traz o tradutor. Elemento complementar tem de aparecer em todas ou "
-              "em nenhuma (Manual IESB 6.2 g). Opções: 1) me mandar o tradutor das outras obras traduzidas; ou "
+              "em nenhuma (Manual [INSTITUIÇÃO] 6.2 g). Opções: 1) me mandar o tradutor das outras obras traduzidas; ou "
               "2) tirar a menção daqui. Não completei nada de memória.")
-C_PAGINA_CITACAO = ("[PENDENTE] Citação direta sem página. O Manual IESB (5.1.1) torna a página obrigatória e, "
+C_PAGINA_CITACAO = ("[PENDENTE] Citação direta sem página. O Manual [INSTITUIÇÃO] (5.1.1) torna a página obrigatória e, "
                     "em documento sem paginação, recomenda indicar o trecho citado.")
 C_SEM_FONTE = ("[PENDENTE] Citação direta sem fonte. Toda citação precisa de chamada e de referência (Manual "
-               "IESB 5). Me diga de onde saiu o trecho.")
+               "[INSTITUIÇÃO] 5). Me diga de onde saiu o trecho.")
 
 # ------------------------------------------------ índices do original (preencher a partir do dump)
 IDX = {
