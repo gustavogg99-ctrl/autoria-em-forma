@@ -6,7 +6,7 @@ Foi feito para a [Autoria em Forma](https://site.autoriaemforma.workers.dev), se
 
 **A divisão de trabalho:** a IA decide **o que** corrigir. O código garante **como** a correção é aplicada: sem perder texto do original, sem alterar citação, com sumário e paginação conferidos.
 
-**Resultado medido** (teste controlado, n=1, documento fictício de 29 páginas; método em [`testes/ifood05/README.md`](testes/ifood05/README.md)): 5h14 à mão contra 18 min com o pipeline, dos quais 3min45 de tempo ativo de quem decide.
+**Teste cronometrado, sem conclusão de ganho de tempo.** Um documento fictício de 29 páginas foi formatado à mão e com o pipeline. Os tempos registrados (5h14 à mão, 18 min com o pipeline) não sustentam conclusão de ganho de tempo: foi uma medição só (n=1); quem conduziu o pipeline escreveu o gerador e viu o gabarito, então essa condição não foi cega; a condição à mão veio primeiro; as etapas das duas condições não coincidem; e as duas tiveram falhas que só apareceram depois (o arquivo feito à mão saiu sem número de página; o do pipeline teve uma referência fora de ordem, um "et al." isolado e uma página a mais no Word e no Google Docs do que no PDF). Método em [`testes/ifood05/README.md`](testes/ifood05/README.md); registro completo em [`docs/10_resultado_teste_cronometrado.md`](docs/10_resultado_teste_cronometrado.md).
 
 > **Privacidade:** nenhum trabalho de cliente está ou esteve neste repositório. O `.gitignore` bloqueia `.docx`, `.pdf` e as pastas `entrada/` e `saida/`. Os documentos de teste são gerados na hora pelo autoteste, com conteúdo fictício.
 
@@ -59,9 +59,9 @@ Requer LibreOffice (`soffice`) para renderizar. Rodar sempre com `python3 -I` (0
 
 ## Página de apresentação
 
-- Fonte: `pagina/fonte.html` (a mesma publicada como artifact no Claude). `python3 -I pagina/gerar_site.py` gera `site/index.html`, que a Cloudflare publica em https://site.autoriaemforma.workers.dev a cada push (`wrangler.jsonc`: só a pasta `site/`).
+- Fonte: `pagina/fonte.html` (a mesma publicada como artifact no Claude). `python3 -I pagina/gerar_site.py` gera `site/index.html`. O site em https://site.autoriaemforma.workers.dev é publicado pela Cloudflare a partir de um repositório privado, não deste: a cópia daqui é referência e pode ficar atrás da versão no ar (`wrangler.jsonc`: só a pasta `site/`).
 - **Preços aparecem em dois lugares da página:** a seção "Preços" (HTML) e a calculadora de orçamento (objeto `TABELA` no script, logo abaixo do comentário "calculadora de orçamento"). Toda mudança no `02_Tabela_Precos_Prazos_Escopo.md` do projeto atualiza os dois.
-- O número de WhatsApp no código é fictício (`+55 61 90000-0000`); o real fica só na versão publicada do site.
+- O número de WhatsApp no código é fictício (`+55 61 90000-0000`); o real fica só no repositório privado que publica o site. Se a publicação passar para este repositório, o número real entra por variável de ambiente, nunca no código.
 - A calculadora não guarda o que a pessoa digita: só calcula no navegador e monta a mensagem do WhatsApp. O contador de acessos registra apenas que houve o envio, com serviço, faculdade e faixa de páginas.
 
 ## Contador de acessos e painel
